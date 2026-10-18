@@ -63,7 +63,20 @@ npm test
 
 ## Deploying
 
-Any Node host works (Render, Railway, Fly.io, a VPS, etc.):
+### Render (set up in this repo)
+
+`render.yaml` describes the whole service, so Render can create it from the repo:
+
+1. Sign in at [render.com](https://render.com) with GitHub.
+2. Click **New + → Blueprint** and choose this repository.
+3. Render asks for the secret values. Enter `OPENAI_API_KEY` and `APP_ACCESS_CODE`, and optionally `ORG_CONTACT_URL`. Then click **Apply**.
+4. When the build finishes, the app is live at `https://<service-name>.onrender.com`. Every push to `main` redeploys it automatically.
+
+On the free plan the service sleeps when idle, so the first visit after a quiet period takes up to a minute. Choose a paid plan in Render if that matters.
+
+### Other hosts
+
+Any Node host works (Railway, Fly.io, a VPS, etc.):
 
 1. Set `OPENAI_API_KEY`, `APP_ACCESS_CODE`, and optionally `ORG_CONTACT_URL` as environment variables.
 2. Build command: `npm install`. Start command: `npm start`.

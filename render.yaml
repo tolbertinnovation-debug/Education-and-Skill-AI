@@ -1,0 +1,28 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# In Render: New + → Blueprint → pick this repo. Render asks for the
+# values marked `sync: false` (your secrets) when it creates the service.
+services:
+  - type: web
+    name: education-and-skill-ai
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: APP_ACCESS_CODE
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-5-mini
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "20"
+      - key: ORG_NAME
+        value: TIH
+      - key: ORG_CONTACT_URL
+        sync: false
