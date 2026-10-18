@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Education & Skills AI</title>
+  <meta name="description" content="AI tutors for WAEC and local curricula, teacher assistants, career coaching and study-abroad guidance." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/vendor/marked/marked.umd.js" defer></script>
+  <script src="/vendor/dompurify/purify.min.js" defer></script>
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🎓 <span>Education &amp; Skills AI</span></div>
+    <nav id="moduleNav" class="module-nav" aria-label="Assistants"></nav>
+  </header>
+
+  <main id="main">
+    <section class="module-head">
+      <h1 id="moduleTitle"></h1>
+      <p id="moduleTagline" class="muted"></p>
+      <details id="contextPanel" class="context" open>
+        <summary>Your settings</summary>
+        <form id="contextForm" class="grid-form" autocomplete="off"></form>
+      </details>
+      <div id="orgCta" class="cta" hidden></div>
+    </section>
+
+    <div class="tabs" role="tablist">
+      <button role="tab" data-view="chat" class="tab active">💬 Chat</button>
+      <button role="tab" data-view="tools" class="tab">🛠️ Tools</button>
+      <button role="tab" data-view="quiz" class="tab" id="quizTab" hidden>📝 Practice quiz</button>
+    </div>
+
+    <!-- Chat -->
+    <section id="view-chat" class="view">
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <div id="starters" class="starters"></div>
+      <form id="chatForm" class="composer">
+        <div id="imagePreview" class="image-preview" hidden>
+          <img alt="Attached image" />
+          <button type="button" id="removeImage" aria-label="Remove image">✕</button>
+        </div>
+        <div class="composer-row">
+          <label id="attachLabel" class="icon-btn" title="Attach a photo of a question or your working">
+            📷<input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+          </label>
+          <textarea id="chatInput" rows="1" placeholder="Ask anything…" maxlength="8000"></textarea>
+          <button id="sendBtn" class="primary" type="submit">Send</button>
+        </div>
+        <div class="composer-foot">
+          <button type="button" id="clearChat" class="link">Clear chat</button>
+          <span class="muted small">AI can make mistakes. Check important facts.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Tools -->
+    <section id="view-tools" class="view" hidden>
+      <div id="toolList" class="tool-list"></div>
+      <div id="toolPanel" hidden>
+        <button type="button" id="backToTools" class="link">← All tools</button>
+        <h2 id="toolName"></h2>
+        <p id="toolDesc" class="muted"></p>
+        <form id="toolForm" class="grid-form"></form>
+        <div id="toolOutputWrap" hidden>
+          <div class="output-actions">
+            <button type="button" id="copyOutput">Copy</button>
+            <button type="button" id="downloadOutput">Download .md</button>
+            <button type="button" id="printOutput">Print / PDF</button>
+          </div>
+          <article id="toolOutput" class="markdown output"></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="view-quiz" class="view" hidden>
+      <form id="quizForm" class="grid-form">
+        <label>Topic (optional)
+          <input name="topic" type="text" maxlength="300" placeholder="Leave blank for a mixed syllabus quiz" />
+        </label>
+        <label>Questions
+          <select name="count"><option>5</option><option selected>10</option><option>15</option></select>
+        </label>
+        <button class="primary" type="submit">Generate quiz</button>
+      </form>
+      <div id="quizArea"></div>
+    </section>
+  </main>
+
+  <dialog id="accessDialog">
+    <form method="dialog" id="accessForm">
+      <h2>Enter access code</h2>
+      <p class="muted">This app is private. Ask the administrator for the access code.</p>
+      <input id="accessInput" type="password" required autocomplete="current-password" />
+      <menu><button class="primary" value="ok">Continue</button></menu>
+    </form>
+  </dialog>
+</body>
+</html>
